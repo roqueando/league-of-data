@@ -1,7 +1,6 @@
 .env
 /airflow-data
 /minio
-
 /venv
 /mysql-metastore
 /mysql
