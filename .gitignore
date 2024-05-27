@@ -1,1 +1,10 @@
 .env
+/airflow-data
+/minio
+
+/venv
+/mysql-metastore
+/mysql
+/postgres
+Dockerfile.hive
+/conf/jars/*.jar
