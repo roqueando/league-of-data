@@ -161,6 +161,8 @@ services:
       - HADOOP_CLASSPATH=/opt/hadoop/share/hadoop/tools/lib/aws-java-sdk-bundle-1.12.730.jar:/opt/hadoop/share/hadoop/tools/lib/hadoop-aws-3.3.6.jar
       - HIVE_VERSION=4.0.0
       - SERVICE_NAME=metastore
+      - AWS_ACCESS_KEY=5BhQJIs21n5bDDB4M8Di
+      - AWS_SECRET_KEY=C0YXxJFUgXm1ZuiAoOvp7i4zZJq1YzFAULWLiVlJ
     ports:
       - 9083:9083
     volumes:
