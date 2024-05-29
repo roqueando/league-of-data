@@ -7,3 +7,4 @@
 /postgres
 Dockerfile.hive
 /conf/jars/*.jar
+/metabase

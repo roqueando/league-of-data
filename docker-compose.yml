@@ -172,6 +172,16 @@ services:
       - ./conf/jars/hadoop-aws-3.3.6.jar:/opt/hive/lib/hadoop-aws-3.3.6.jar
     networks:
       - trino-network
+        
+  metabase:
+    image: metabase/metabase
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      - ./metabase/:/metabase-data
+    networks:
+      - trino-network
 
 networks:
   trino-network:

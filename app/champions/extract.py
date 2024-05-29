@@ -6,6 +6,7 @@ import requests
 import os
 import boto3
 import json
+import sys
 
 LEAGUE_CHAMPIONS_URL = os.environ.get('LEAGUE_CHAMPIONS_URL')
 LEAGUE_REALM = os.environ.get('LEAGUE_REALM')
@@ -15,7 +16,6 @@ LEAGUE_LANG = os.environ.get('LEAGUE_LANG')
 MINIO_URL = os.environ.get('MINIO_URL')
 
 
-# TODO: versions need to be placed in minio for further analysis
 def get_versions() -> dict:
     """get the current version of league of legends"""
     try:
@@ -27,7 +27,6 @@ def get_versions() -> dict:
         raise SystemExit(e)
 
 
-# TODO: champions need to be placed in minio for further analysis
 def get_champions_json(versions: dict) -> dict:
     """
     Get all champions and save at minio
@@ -58,16 +57,20 @@ def extract():
                         config=boto3.session.Config(signature_version='s3v4'),
                         verify=False)
     try:
+        filename = datetime.now().strftime("%Y-%m-%d")
         versions = get_versions()
+        versions['inserted_at'] = filename
 
-        filename = datetime.now().strftime("%d%m%Y%H%M%S")
         put_file('versions', filename, versions, s3)
         print('versions saved!')
 
         champions = get_champions_json(versions)
+        champions_list = []
+        for _, champ_data in champions['data'].items():
+            champions_list.append(champ_data)
 
-        put_file_at_root('champions', champions, s3)
-        print('champions saved!')
+        put_file_at_root('champions', champions_list, s3)
+        print('extracted!')
     except Exception as e:
         print(e)
 
