@@ -180,6 +180,9 @@ services:
       - 3001:3000
     volumes:
       - ./metabase/:/metabase-data
+      - ./plugins/:/plugins
+    environment:
+      MB_PLUGINS_DIR: /plugins
     networks:
       - trino-network
 
