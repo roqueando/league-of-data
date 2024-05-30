@@ -1,9 +1,9 @@
 FROM python:3.12-slim
 
-WORKDIR /pipe
+WORKDIR /app
 
-COPY ./pipe /pipe
-COPY ./requirements.txt /pipe/requirements.txt
+COPY ./app /app
+COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 

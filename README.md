@@ -8,8 +8,9 @@
 
 The project still in development and the next updates will be coded in the following tasks:
 - [x] Trino, Hive and MinIO for data catalog and data lake
-- [] integrate with metabase for data analysis
-- [] create model that recommend for you a build of items based on chosen Champion
+- [x] integrate with metabase for data analysis
+- [ ] ELT for shop items in LoL
+- [ ] create model that recommend for you a build of items based on chosen Champion
 
 ## 💻 pre-requisites
 
@@ -59,6 +60,9 @@ This data pipeline works with Airflow for orchestrating so first of all:
 ```sh
 docker-compose up -d
 ```
-- login into airflow (user: airflow | password: airflow)
-- search for `elt_base` DAG and trigger
+
+## 📊setting up metabase
+
+Metabase will be loaded with plugins (inside the plugins folder you can see all plugins that metabase has) but you will need to setup the Trino. Make sure the database type (Tipo de banco de dados in the image below) is Starburst, then populate with the values that is in `.env.example`. Trino by default in docker does not have password, so you does not need input one, but in a real and production data project all of these is needed to be in a vault or some secret.
+[metabase_setup](images/metabase-config)
 
