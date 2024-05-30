@@ -64,5 +64,5 @@ docker-compose up -d
 ## 📊setting up metabase
 
 Metabase will be loaded with plugins (inside the plugins folder you can see all plugins that metabase has) but you will need to setup the Trino. Make sure the database type (Tipo de banco de dados in the image below) is Starburst, then populate with the values that is in `.env.example`. Trino by default in docker does not have password, so you does not need input one, but in a real and production data project all of these is needed to be in a vault or some secret.
-[metabase_setup](images/metabase-config)
+[metabase_setup](images/metabase-config.png)
 
