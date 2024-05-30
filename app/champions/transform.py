@@ -55,7 +55,7 @@ def transform():
 
     for index, row in df.iterrows():
         filename = row['id']
-        data_content = row.to_json()
+        data_content = json.loads(row.to_json())
         put_file('champions', filename, data_content, s3)
 
     print('transformed data')
