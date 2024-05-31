@@ -21,6 +21,8 @@ cursor = conn.cursor()
 
 LEAGUE_LANG = os.environ.get('LEAGUE_LANG')
 MINIO_URL = os.environ.get('MINIO_URL')
+MINIO_ACCESS_KEY = os.environ.get('MINIO_ACCESS_KEY')
+MINIO_SECRET_KEY = os.environ.get('MINIO_SECRET_KEY')
 CURRENT_VERSION = os.environ.get('CURRENT_VERSION')
 
 def get_object(s3, filename: str) -> dict:
@@ -39,7 +41,9 @@ def put_file(folder:str, filename: str, data: dict, s3) -> None:
 def transform():
     s3 = boto3.client('s3', endpoint_url=MINIO_URL,
                         config=boto3.session.Config(signature_version='s3v4'),
-                        verify=False)
+                        verify=False,
+                        aws_access_key_id=MINIO_ACCESS_KEY,
+                        aws_secret_access_key=MINIO_SECRET_KEY)
     champions = get_object(s3, "champions.json")
     df = pd.DataFrame(champions) \
         .drop(columns=['blurb', 'title', 'image', 'partype'])

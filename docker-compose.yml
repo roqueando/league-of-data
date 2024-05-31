@@ -48,6 +48,8 @@ services:
     <<: *airflow-common
     container_name: airflow_init
     entrypoint: /bin/bash
+    environment:
+      <<: *airflow-common-env
     command:
       - -c
       - airflow db init &&
@@ -73,6 +75,8 @@ services:
       start_period: 30s
     restart: always
     container_name: airflow_webserver
+    environment:
+      <<: *airflow-common-env
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -89,6 +93,8 @@ services:
       start_period: 30s
     restart: always
     container_name: airflow_scheduler
+    environment:
+      <<: *airflow-common-env
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
