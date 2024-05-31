@@ -8,3 +8,5 @@
 Dockerfile.hive
 /conf/jars/*.jar
 /metabase
+.DS_Store
+*/.DS_Store

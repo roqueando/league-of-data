@@ -40,6 +40,7 @@ with DAG(
         'TRINO_CATALOG': TRINO_CATALOG,
         'TRINO_SCHEMA': TRINO_SCHEMA
     }
+    network = 'league-of-data_trino-network'
 
     extract_task = DockerOperator(
         task_id='extract_champions',
@@ -51,7 +52,7 @@ with DAG(
         auto_remove=True,
         command="champions.extract",
         environment=environment,
-        network_mode='league-of-data_default'
+        network_mode=network
     )
 
     transform_task = DockerOperator(
@@ -64,7 +65,7 @@ with DAG(
         auto_remove=True,
         command="champions.transform",
         environment=environment,
-        network_mode='league-of-data_default'
+        network_mode=network
     )
 
     extract_task >> transform_task

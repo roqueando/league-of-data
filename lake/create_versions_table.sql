@@ -5,5 +5,6 @@ create table if not exists minio.league_data.versions(
 		"champion" VARCHAR,
 		"language" VARCHAR
 	),
-	"inserted_at" DATETIME DEFAULT CURRENT_TIMESTAMP
+	"inserted_at" DATE
 ) with (format = 'JSON', external_location='s3a://league-data/versions/');
+
